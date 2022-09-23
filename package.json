@@ -1,0 +1,25 @@
+{
+  "name": "delivery-service-cli",
+  "version": "1.0.0",
+  "description": "parcel delivery cli for cost and time calculation",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imbhaskarn/delivery-service-cli.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "npm",
+    "cli"
+  ],
+  "author": "bhaskar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imbhaskarn/delivery-service-cli/issues"
+  },
+  "homepage": "https://github.com/imbhaskarn/delivery-service-cli#readme"
+}
