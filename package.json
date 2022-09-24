@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "parcel delivery cli for cost and time calculation",
   "main": "cli.js",
+  "bin": {
+    "delivery-cli": "./src/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/imbhaskarn/delivery-service-cli/issues"
   },
-  "homepage": "https://github.com/imbhaskarn/delivery-service-cli#readme"
+  "homepage": "https://github.com/imbhaskarn/delivery-service-cli#readme",
+  "dependencies": {
+    "commander": "^9.4.0"
+  }
 }
