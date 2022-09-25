@@ -1,0 +1,25 @@
+{
+    "OFR001": {
+        "prct": 10,
+        "minDist": 0,
+        "maxDist": 200,
+        "minWeight": 70,
+        "maxWeight": 250
+
+    },
+    "OFR002": {
+        "prct": 7,
+        "minDist": 50,
+        "maxDist": 150,
+        "minWeight": 100,
+        "maxWeight": 250
+
+    },
+    "OFR003": {
+        "prct": 5,
+        "minDist": 50,
+        "maxDist": 250,
+        "minWeight": 10,
+        "maxWeight": 150
+    }
+}

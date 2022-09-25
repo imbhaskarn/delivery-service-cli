@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/imbhaskarn/delivery-service-cli#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^9.4.0"
   }
 }
