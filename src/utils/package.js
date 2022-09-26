@@ -61,9 +61,6 @@ class Package {
 			errors: errors,
 		};
 	}
-    vehicleInfo(){
-    
-    }
 	parsePackage() {
 		const pkgArr = this.packages.split(",");
 		let packages = [];
