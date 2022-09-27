@@ -1,3 +1,11 @@
+To initiliaze the project you should have npm and node installed
+
+```
+npm version: 8.12.1
+node version: v18.4.0
+```
+Now you can run npm init.
+
 To run commands in this project go to root directory of this project in terminal.
 
 This Cli only supports two main commands cost and time
