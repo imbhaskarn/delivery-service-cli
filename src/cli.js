@@ -72,7 +72,7 @@ program
 		);
 		if (validation.error) {
 			console.log(chalk.red(validation.errors));
-			return 0;
+			return;
 		}
 		const packageGroup = packageString.packageGroup(packageList);
 		const newVehicle = new Vehicle([2, 70, 200], packageGroup.baseCost);
