@@ -35,7 +35,9 @@ program
 		const packageGroup = packageString.packageGroup(packageList);
 		const cost = new DeliveryCost(packageGroup);
 		const totalCost = cost.calculate();
-		console.log(totalCost)
+		totalCost.forEach(item => {
+			console.log(`${item.packageId} ${item.discount} ${item.totalCost}`)
+		})
 	});
 
 program
@@ -77,18 +79,21 @@ program
 		let remainingPkgs = packageGroup.packages
 		let toBeSentPkgs = []
 		for (let idx = 0; idx < packageGroup.packages.length; idx++) {
-			if(remainingPkgs.length != 0){
-			deliveryData = newVehicle.deliveryOfPackage(remainingPkgs)
-			// console.log(deliveryData)
-			remainingPkgs = deliveryData.pkgsLeft || []
-			toBeSentPkgs.push(deliveryData.packagesSent)
+			if (remainingPkgs.length != 0) {
+				deliveryData = newVehicle.deliveryOfPackage(remainingPkgs)
+				// console.log(deliveryData)
+				remainingPkgs = deliveryData.pkgsLeft || []
+				toBeSentPkgs.push(deliveryData.packagesSent)
 			}
-			else{
+			else {
 				break;
 			}
 		}
-	 	const packagesCostAndTime =	newVehicle.getDeliveryTime(toBeSentPkgs)
-		console.log(packagesCostAndTime)
+		let valString = ''
+		const packagesCostAndTime = newVehicle.getDeliveryTime(toBeSentPkgs)
+		packagesCostAndTime.forEach(item => {
+			console.log(`${item.packageId} ${item.discount} ${item.totalCost} ${item.estTime.toFixed(2)}`)
+		})
 	});
 
 program.parse();

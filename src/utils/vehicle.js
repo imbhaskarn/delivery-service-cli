@@ -62,7 +62,7 @@ class LoadAndTime {
 
 class Vehicle {
     constructor(vehicle, baseCost) {
-        this.baseCost = baseCost
+        this.baseCost = parseInt(baseCost)
         this.nOfvVehicles = parseInt(vehicle[0])
         this.maxSpeed = vehicle[1]
         this.maxCapacity = vehicle[2]
@@ -100,8 +100,8 @@ class Vehicle {
                 pkgInWay.forEach((item) => {
                     let totalCost = parseInt(
                         this.baseCost +
-                        item.pkgWeight * 10 +
-                        item.distanceInKms * 5
+                        parseInt(item.pkgWeight) * 10+
+                        parseInt(item.distanceInKms) * 5
                     )
                     discount = D.getDiscount(totalCost, item);
                     let TimeCostPerPackage = {
@@ -119,24 +119,21 @@ class Vehicle {
                 });
                 let estTime = 0
                 let leastVehicleTime = Math.min(...vehicles);
-                if(leastVehicleTime === 6653.571428571428){
-                    console.log(leastVehicleTime,'\n', vehicles, )
-                }
                 let vehicleIndex = vehicles.indexOf(leastVehicleTime);
                 
                 pkgInWay.forEach((item) => {
                    estTime = (leastVehicleTime + (item.distanceInKms / this.maxSpeed) *2)
                    let totalCost = parseInt(
-                    this.baseCost +
-                    item.pkgWeight * 10 +
-                    item.distanceInKms * 5
+                    (this.baseCost) +
+                    parseInt(item.pkgWeight) * 10 +
+                    parseInt(item.distanceInKms) * 5
                 )
                 discount = D.getDiscount(totalCost, item);
                     let TimeCostPerPackage = {
                         packageId: item.packageId,
                         discount: discount.discount,
                         totalCost: totalCost - discount.discount,
-                        estTime: estTime,
+                        estTime: leastVehicleTime + (item.distanceInKms / this.maxSpeed),
                     };
 
                     vehicles[vehicleIndex] = estTime;
@@ -144,59 +141,9 @@ class Vehicle {
                 });
             }
         });
-        console.log(vehicles)
         return result;
     }
 }
 
 module.exports = Vehicle
-
-const newVehicle = new Vehicle([2, 70, 200], 100);
-const packages = [
-  [
-    {
-      id: 2,
-      packageId: 'PKG2',
-      pkgWeight: 75,
-      distanceInKms: 125,
-      offerCode: 'OFFR0008'
-    },
-    {
-      id: 4,
-      packageId: 'PKG4',
-      pkgWeight: 110,
-      distanceInKms: 60,
-      offerCode: 'OFFR002'
-    }
-  ],
-  [
-    {
-      id: 3,
-      packageId: 'PKG3',
-      pkgWeight: 175,
-      distanceInKms: 100,
-      offerCode: 'OFFR003'
-    }
-  ],
-  [
-    {
-      id: 5,
-      packageId: 'PKG5',
-      pkgWeight: 155,
-      distanceInKms: 95,
-      offerCode: 'NA'
-    }
-  ],
-  [
-    {
-      id: 1,
-      packageId: 'PKG1',
-      pkgWeight: 50,
-      distanceInKms: 30,
-      offerCode: 'OFR001'
-    }
-  ]
-]
-newVehicle.getDeliveryTime(packages)
-// console.log();
 
