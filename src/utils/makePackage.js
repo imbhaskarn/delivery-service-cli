@@ -8,6 +8,7 @@ class MakePackage{
                     distanceInKms: parseInt(item[2]) || 1,
                     offerCode: item[3].toUpperCase() || '',
                 });
+                id++
             });
             return packageList
         }

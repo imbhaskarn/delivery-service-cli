@@ -14,7 +14,7 @@ class Discount {
 			isValid = true;
 		}
 		return {
-			discount: isValid ? (totalCost / 100) * coupon.prct : 0,
+			discount: isValid ? ((totalCost / 100) * coupon.prct).toFixed(2) : 0,
 		};
 	}
 }
