@@ -1,6 +1,4 @@
-const { AllPackages } = require("../package/allPackages");
 const Vehicle = require("../vehicle/vehicle");
-
 class SetDelivery {
     static receipt(allpackages, vehicleInfo) {
         const packages = allpackages
