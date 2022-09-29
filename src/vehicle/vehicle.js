@@ -1,38 +1,32 @@
-const D = require("./getCouponDiscount");
+
+const { DeliveryCost, PerPackageCost } = require("../deliveryCost/costAndDiscount");
 
 class LoadAndTime {
     static trip(pkgGrp, target) {
-        let first = 0;
-        let second = 0;
+        let pacakgesInATrip = []
         let count = 0;
         let pkgsLeft = [];
         let indexes = [];
-        let packagesSent = {};
-        for (let idx = 0; idx < pkgGrp.length; idx++) {
-            for (let jdx = 0; jdx < pkgGrp.length; jdx++) {
+        for (let i = 0; i < pkgGrp.length; i++) {
+            for (let j = 0; j < pkgGrp.length; j++) {
                 if (
-                    pkgGrp[idx].pkgWeight + pkgGrp[jdx].pkgWeight > count &&
-                    pkgGrp[idx].pkgWeight + pkgGrp[jdx].pkgWeight < target
+                    pkgGrp[i].pkgWeight + pkgGrp[j].pkgWeight > count &&
+                    pkgGrp[i].pkgWeight + pkgGrp[j].pkgWeight < target
                 ) {
-                    count = pkgGrp[idx].pkgWeight + pkgGrp[jdx].pkgWeight;
-                    first = idx;
-                    second = jdx;
+                    count = pkgGrp[idx].pkgWeight + pkgGrp[j].pkgWeight;
+                    pacakgesInATrip.push(...[i, j])
                 }
             }
         }
-        if (first == second) {
+
+        if (pacakgesInATrip[0] == pacakgesInATrip[1]) {
             let maxWeight = 0;
             let maxWeightIndex = 0;
-            // for (let idx = 0; idx < pkgGrp.length; idx++) {
-            //     if(pkgGrps[idx].pkgWeight <= target){
-            //         packages.push(pkgGrp[idx].pkgWeight)
-            //     }
-            // }
-            for (let kdx = 0; kdx < pkgGrp.length; kdx++) {
-                const el = pkgGrp[kdx].pkgWeight;
+            for (let i = 0; i < pkgGrp.length; i++) {
+                const el = pkgGrp[i].pkgWeight;
                 if (el > maxWeight) {
                     maxWeight = el;
-                    maxWeightIndex = kdx;
+                    maxWeightIndex = i;
                 }
             }
             indexes.push(maxWeightIndex);
@@ -46,14 +40,14 @@ class LoadAndTime {
                 pkgsLeft: pkgsLeft,
             };
         } else {
-            indexes.push(first, second);
+            indexes.push(...pacakgesInATrip);
             for (let k = 0; k < pkgGrp.length; k++) {
                 if (indexes.includes(k) !== true) {
                     pkgsLeft.push(pkgGrp[k]);
                 }
             }
             return {
-                packagesSent: [pkgGrp[first], pkgGrp[second]],
+                packagesSent: [pkgGrp[pacakgesInATrip[0]], pkgGrp[pacakgesInATrip[1]]],
                 pkgsLeft: pkgsLeft,
             };
         }
@@ -89,53 +83,41 @@ class Vehicle {
         let vehicles = [];
         let result = [];
         packageTrips.forEach((pkgInWay) => {
-            let discount = 0;
-            let timeTaken = 0;
-            let distArr = [];
+            let timeTakenOnTrip = 0;
+            let allDistances = [];
             if (vehicles.length < this.nOfvVehicles) {
                 pkgInWay.forEach((item) => {
-                    distArr.push(item.distanceInKms);
+                    allDistances.push(item.distanceInKms);
                 });
-                timeTaken =((Math.max(...distArr) / this.maxSpeed) * 2)
+                timeTakenOnTrip = ((Math.max(...allDistances) / this.maxSpeed) * 2)
                 pkgInWay.forEach((item) => {
-                    let totalCost = parseInt(
-                        this.baseCost +
-                        parseInt(item.pkgWeight) * 10+
-                        parseInt(item.distanceInKms) * 5
-                    )
-                    discount = D.getDiscount(totalCost, item);
+                    const packageCost = PerPackageCost.getCost(item, this.baseCost);
                     let TimeCostPerPackage = {
                         packageId: item.packageId,
-                        discount: discount.discount,
-                        totalCost: totalCost - discount.discount,
+                        discount: packageCost.discount,
+                        totalCost:packageCost.actualPackageCost,
                         estTime: (item.distanceInKms / this.maxSpeed),
                     };
                     result.push(TimeCostPerPackage);
-                    vehicles.push(timeTaken);
+                    vehicles.push(timeTakenOnTrip);
                 });
             } else {
                 pkgInWay.forEach((item) => {
-                    distArr.push(item.distanceInKms);
+                    allDistances.push(item.distanceInKms);
                 });
                 let estTime = 0
                 let leastVehicleTime = Math.min(...vehicles);
                 let vehicleIndex = vehicles.indexOf(leastVehicleTime);
-                
+
                 pkgInWay.forEach((item) => {
-                   estTime = (leastVehicleTime + (item.distanceInKms / this.maxSpeed) *2)
-                   let totalCost = parseInt(
-                    (this.baseCost) +
-                    parseInt(item.pkgWeight) * 10 +
-                    parseInt(item.distanceInKms) * 5
-                )
-                discount = D.getDiscount(totalCost, item);
+                    estTime = (leastVehicleTime + (item.distanceInKms / this.maxSpeed) * 2)
+                    const packageCost = PerPackageCost.getCost(item, this.baseCost);
                     let TimeCostPerPackage = {
                         packageId: item.packageId,
-                        discount: discount.discount,
-                        totalCost: totalCost - discount.discount,
+                        discount: packageCost.discount,
+                        totalCost:packageCost.actualPackageCost,
                         estTime: leastVehicleTime + (item.distanceInKms / this.maxSpeed),
                     };
-
                     vehicles[vehicleIndex] = estTime;
                     result.push(TimeCostPerPackage);
                 });

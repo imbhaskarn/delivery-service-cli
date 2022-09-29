@@ -1,9 +1,8 @@
 const offerList = require("./offers.json");
 
-class Discount {
-	static getDiscount(totalCost, pkg) {
+class Coupon {
+	static CalculateDiscount(pkg, totalCost) {
 		const coupon = offerList[pkg.offerCode];
-		let isValid = false;
 		if (
 			coupon !== void 0 &&
 			pkg.pkgWeight >= coupon.minWeight &&
@@ -11,12 +10,11 @@ class Discount {
 			pkg.distanceInKms >= coupon.minDist &&
 			pkg.distanceInKms <= coupon.maxDist
 		) {
-			isValid = true;
+			return (totalCost / 100) * coupon.prct
 		}
-		return {
-			discount: isValid ? ((totalCost / 100) * coupon.prct) : 0,
-		};
+		return 0;
 	}
 }
 
-module.exports = Discount;
+
+module.exports = {Coupon};

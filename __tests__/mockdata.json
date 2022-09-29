@@ -1,11 +1,30 @@
 {
-    "packageString": [[ "PKG1", "50", "30", "OFR001" ]],
-    "pkg": {
-        "packageId": "PKG3",
-        "pkgWeight": 10,
-        "distanceInKms": 100,
-        "offerCode": "OFR003"
-      },
-    "costCliCommand" : "node ./src/cli.js cost -p 100 -n 3 -ps 'PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003'",
-    "timeCommand": "node ./src/cli.js time -p 100 -n 3 -ps 'PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003' -vi 2 70 200"
+  "packageString": [
+    [
+      "PKG1",
+      "50",
+      "30",
+      "OFR001"
+    ]
+  ],
+  "pkg": {
+    "packageId": "PKG3",
+    "pkgWeight": 10,
+    "distanceInKms": 100,
+    "offerCode": "OFR003"
+  },
+  "costCliCommand": "node ./src/cli.js cost -p 100 -n 3 -ps 'PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003'",
+  "timeCommand": "node ./src/cli.js time -p 100 -n 3 -ps 'PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003' -vi 2 70 200",
+  "allPackagesGroup": {
+    "baseCost": 100,
+    "units": 5,
+    "listOfPackages": [
+      {
+        "packageId": "PKG1",
+        "pkgWeight": 50,
+        "distanceInKms": 30,
+        "offerCode": "OFR001"
+      }
+    ]
+  }
 }
