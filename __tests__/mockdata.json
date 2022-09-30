@@ -26,5 +26,37 @@
         "offerCode": "OFR001"
       }
     ]
-  }
+  },
+  "flags": {
+    "price": 100,
+    "items": 3,
+    "packages": [
+      "PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003"
+    ]
+  },
+  "rawPackage": {
+    "baseCost": 100,
+    "units": 3,
+    "stringPackageList": "PKG1 5 5 OFR001, PKG2 15 5 OFR002, PKG3 10 100 OFR003",
+    "type": "cost",
+    "vehicleInfoString": ""
+  },
+  "rawPackageList": [
+    [
+      "PKG1",
+      "5",
+      "5",
+      "OFR001"
+    ],
+    [
+      "PKG2', '15', '5",
+      "OFR002"
+    ],
+    [
+      "PKG3",
+      "10",
+      "100",
+      "OFR003"
+    ]
+  ]
 }

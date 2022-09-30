@@ -1,8 +1,8 @@
-const offerList = require("./offers.json");
+const offerList = require('./offers.json')
 
 class Coupon {
 	static CalculateDiscount(pkg, totalCost) {
-		const coupon = offerList[pkg.offerCode];
+		const coupon = offerList[pkg.offerCode]
 		if (
 			coupon !== void 0 &&
 			pkg.pkgWeight >= coupon.minWeight &&
@@ -12,9 +12,9 @@ class Coupon {
 		) {
 			return (totalCost / 100) * coupon.prct
 		}
-		return 0;
+		return 0
 	}
 }
 
 
-module.exports = {Coupon};
+module.exports = {Coupon}
