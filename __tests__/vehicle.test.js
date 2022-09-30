@@ -14,7 +14,6 @@ describe('MaxLoadAndTime', () => {
 			distanceInKms: 5,
 			offerCode: 'OFR002'
 		}], 90)
-		console.log(tripData)
 		expect(tripData.packagesSent).toEqual([
 			{
 				packageId: 'PKG1',
