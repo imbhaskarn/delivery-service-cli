@@ -1,4 +1,4 @@
-const { PerPackageCost } = require('../deliveryCost/costAndDiscount')
+const { PerPackageCost } = require('../deliveryCost/deliveryCost')
 
 class MaxLoad {
 	static trip(pkgGrp, target) {

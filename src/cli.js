@@ -1,6 +1,6 @@
 const { Command } = require('commander')
 const program = new Command()
-const {DeliveryCost} = require('./deliveryCost/costAndDiscount')
+const {DeliveryCost} = require('./deliveryCost/deliveryCost')
 const { AllPackages } = require('./package/allPackages')
 const { SetDelivery } = require('./setDelivery/setDelivery')
 program
