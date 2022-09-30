@@ -1,4 +1,4 @@
-const {Coupon} = require("../coupon/coupon");
+const {Coupon} = require('../coupon/coupon')
 
 class PerPackageCost {
 	static getCost(pkg, baseCost){
@@ -14,19 +14,19 @@ class PerPackageCost {
 class DeliveryCost {
 	constructor(packageGroup) {
 		this.baseCost = parseInt(packageGroup.baseCost)
-        this.packageGroup = packageGroup.listOfPackages
+		this.packageGroup = packageGroup.listOfPackages
 	}
 	calculate() {
-		let allPkgsWithCost = [];
+		let allPkgsWithCost = []
 		this.packageGroup.forEach((item) => {
 			const packageCost = PerPackageCost.getCost(item, this.baseCost)
 			allPkgsWithCost.push({
 				packageId: item.packageId,
 				discount: packageCost.discount,
-                totalCost: packageCost.actualPackageCost
-			});
-		});
-        return allPkgsWithCost
+				totalCost: packageCost.actualPackageCost
+			})
+		})
+		return allPkgsWithCost
 	}
 }
 
